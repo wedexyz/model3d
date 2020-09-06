@@ -2,27 +2,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-        <title>Babylon.js sample code</title>
-
+        <title>model code</title>
         <!-- Babylon.js -->
-        <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
-        <script src="https://preview.babylonjs.com/ammo.js"></script>
-        <script src="https://preview.babylonjs.com/cannon.js"></script>
-        <script src="https://preview.babylonjs.com/Oimo.js"></script>
-        <script src="https://preview.babylonjs.com/libktx.js"></script>
-        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
-        <script src="https://preview.babylonjs.com/babylon.js"></script>
-        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
-        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
-        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
-        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
-        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
-        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
-        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
-        <script src="jsfix/firebase.js"></script>
-
+       
         <style>
             html, body {
                 overflow: hidden;
@@ -44,35 +26,36 @@
  
    <p>Jarak deteksi : <span id="jarak" style="background-color: transparent;color:yellow"></span> cm</p>
     <canvas id="renderCanvas"></canvas>
- 
+     <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/ammo.js"></script>
+        <script src="https://preview.babylonjs.com/cannon.js"></script>
+        <script src="https://preview.babylonjs.com/Oimo.js"></script>
+        <script src="https://preview.babylonjs.com/libktx.js"></script>
+        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+        <script src="https://preview.babylonjs.com/babylon.js"></script>
+        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <script src="jsfix/firebase.js"></script>
     <script>
-
- 
-
-
-
-
-
         var canvas = document.getElementById("renderCanvas");
-        //var engine = null;
+        var engine = null;
         var scene = null;
         var sceneToRender = null;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
         var delayCreateScene = function () {
-        
-            
-            // Model by Mixamo
-        
-           // engine.enableOfflineSupport = false;
-            
-            // This is really important to tell Babylon.js to use decomposeLerp and matrix interpolation
+
+            engine.enableOfflineSupport = false;
+            //This is really important to tell Babylon.js to use decomposeLerp and matrix interpolation
             BABYLON.Animation.AllowMatricesInterpolation = true;
-        
             var scene = new BABYLON.Scene(engine);
-        
             var camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 4, 3, new BABYLON.Vector3(0, 1, 0), scene);
             camera.attachControl(canvas, true);
-        
             camera.lowerRadiusLimit = 2;
             camera.upperRadiusLimit = 10;
             camera.wheelDeltaPercentage = 0.01;
@@ -88,7 +71,6 @@
             var shadowGenerator = new BABYLON.ShadowGenerator(1024, light2);
             shadowGenerator.useBlurExponentialShadowMap = true;
             shadowGenerator.blurKernel = 32;
-        	
             engine.displayLoadingUI();
         
         	BABYLON.SceneLoader.ImportMesh("", "./scenes/", "dummy3.babylon", scene, function (newMeshes, particleSystems, skeletons) {
@@ -162,7 +144,6 @@ else if (snapshot.val()==5){
                         scene.stopAnimation(skeleton);
                         var walkAnim = scene.beginWeightedAnimation(skeleton, walkRange.from, walkRange.to, 0.5, true);
                         var leftAnim = scene.beginWeightedAnimation(skeleton, leftRange.from, leftRange.to, 0.5, true);
-        
                         // Note: Sync Speed Ratio With Master Walk Animation
                         walkAnim.syncWith(null);
                         leftAnim.syncWith(walkAnim);
@@ -170,13 +151,7 @@ else if (snapshot.val()==5){
 }
 });  
 
-
-
-
-               
-                 
-   
-         
+       
                 // UI
                 var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
                 var UiPanel = new BABYLON.GUI.StackPanel();
